@@ -65,7 +65,16 @@ namespace ResxToXliff
             foreach (var transResx in appArgs.TranslatedResxes)
             {
                 // Best line of code I should never write again :-)
-                var targetCulture = new CultureInfo(Path.GetExtension(Path.GetFileNameWithoutExtension(transResx)).Replace(".", ""));
+                var cultureName = Path.GetExtension(Path.GetFileNameWithoutExtension(transResx)).Replace(".", "");
+
+                // If culture is not specified in the filename it might be in the directory name
+                if (string.IsNullOrEmpty(cultureName))
+                {
+                    // Keeping the code style on the same level ;-)
+                    cultureName = Path.GetFileName(Path.GetDirectoryName(transResx));
+                }
+
+                var targetCulture = new CultureInfo(cultureName);
                 var xliffTargets = XliffDocument.ReadFromResource(transResx, sourceCulture, string.Empty, ResourceType.Resx);
                 if (xliffTargets.Count > 1)
                     throw new Exception("Unexpected number of XLIFF Documents returned");
