@@ -25,4 +25,4 @@ ResxToXliff .\ en-US AppResources.resx AppResources.de-DE.resx AppResources.fr-F
 These XLIFF file can now be imported into your MAT enabled project.
 NOTE: You will need to check the 'Enable resource recycling' checkbox when importing these files.
 
-**Build note:** *If MAT is not installed on the machine, the DLL references will fail. Click the following link to install the [Microsoft App Toolkit] (http://aka.ms/matinstall).*
+**Build note:** *If MAT is not installed on the machine, the DLL references will fail. Click the following link to install the [Multilingual App Toolkit] (http://aka.ms/matinstall).*
