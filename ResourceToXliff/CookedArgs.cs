@@ -15,12 +15,15 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
 // IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace ResxToXliff
+namespace ResourceToXliff
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
+
+    using Microsoft.Multilingual.Utilities;
 
     internal class CookedArgs
     {
@@ -35,15 +38,32 @@ namespace ResxToXliff
 
             OutputFolder = args[0];
             DefaultLanguage = args[1];
-            DefaultResx = args[2];
+            this.DefaultResourceFile = args[2];
 
-            List<string> transResx = new List<string>();
-            for(int idx = 3; idx<args.Count(); idx++)
+            switch (Path.GetExtension(DefaultResourceFile).ToUpperInvariant())
             {
-                transResx.Add(args[idx]);
+                case ".RESX":
+                    ResourceFileType = ResourceType.Resx;
+                    break;
+                case ".RESW":
+                    ResourceFileType = ResourceType.Resw;
+                    break;
+                case ".RESJSON":
+                    ResourceFileType = ResourceType.ResJson;
+                    break;
+                default:
+                    IsArgError = true;
+                    ErrorMessage = "Unsupported file extension";
+                    return;
             }
 
-            TranslatedResxes = transResx;
+            List<string> resourceFiles = new List<string>();
+            for(int idx = 3; idx<args.Count(); idx++)
+            {
+                resourceFiles.Add(args[idx]);
+            }
+
+            this.TranslatedResourceFiles = resourceFiles;
         }
 
         internal void Usage()
@@ -52,19 +72,24 @@ namespace ResxToXliff
             Console.WriteLine(ErrorMessage);
 
             Console.WriteLine("\nUsage: ");
-            Console.WriteLine("ResxToXliff OutputFolder DefaultLanguage DefaultResxFile TranslatedResxFile1 [TranslatedResxFile2 ...]");
+            Console.WriteLine("ResourceToXliff OutputFolder DefaultLanguage DefaultResourceFile TranslatedResourceFile1 [TranslatedResourceFile2 ...]");
             Console.WriteLine("\nWhere:");
             Console.WriteLine("\tOutputFolder            = The folder to place the resulting XLF files");
-            Console.WriteLine("\tDefaultResxLanguageCode = Language of DefaultResxFile.  (e.g.: 'en-US')");
-            Console.WriteLine("\tDefaultResxFile         = RESX based project's default RES file.  (e.g.: 'AppResources.resx')");
-            Console.WriteLine("\tTranslatedResxFile1     = project's Translated RESX file.  (e.g.: 'AppResources.de-DE.resx'");
-            Console.WriteLine("\tTranslatedResxFile2     = Ditto");
-            Console.WriteLine("\nfor example, running this command:");
-            Console.WriteLine("\tResxToXliff .\\ en-US AppResources.resx AppResources.de-DE.resx AppResources.fr-FR.resx");
+            Console.WriteLine("\tDefaultLanguageCode     = Source language of the DefaultResourceFile.  (e.g.: 'en-US')");
+            Console.WriteLine("\tDefaultResourceFile     = project's default resource file.  (e.g.: 'AppResources.resx')");
+            Console.WriteLine("\tTranslatedResourceFile1 = project's Translated RESX file.  (e.g.: 'AppResources.de-DE.resx'");
+            Console.WriteLine("\tTranslatedResourceFile2 = Ditto");
+            Console.WriteLine("\nRESX usage example:");
+            Console.WriteLine("\tResourceToXliff .\\ en-US AppResources.resx AppResources.de-DE.resx AppResources.fr-FR.resx");
             Console.WriteLine("\nWill create two XLIFF 1.2 based files in the current directory:");
             Console.WriteLine("\tAppResources.de-DE.xlf");
             Console.WriteLine("\tAppResources.fr-FR.xlf");
-            Console.WriteLine("\nThese XLIFF file can now be imported into your MAT enabled project.");
+            Console.WriteLine("\nRESW usage example:");
+            Console.WriteLine("\tResourceToXliff .\\ en-US en-US\\Resources.resw de-DE\\Resources.resw fr-FR\\Resources.resw");
+            Console.WriteLine("\nWill create two XLIFF 1.2 based files in the current directory:");
+            Console.WriteLine("\tResources.de-DE.xlf");
+            Console.WriteLine("\tResources.fr-FR.xlf");
+            Console.WriteLine("\nThe resulting XLIFF files can now be imported into your MAT enabled projects.");
             Console.WriteLine("NOTE: You will need to check the 'Enable resource recycling' checkbox when importing these files.");
         }
 
@@ -76,8 +101,10 @@ namespace ResxToXliff
 
         internal string DefaultLanguage { get; private set; }
 
-        internal string DefaultResx { get; private set; }
+        internal string DefaultResourceFile { get; private set; }
 
-        internal IEnumerable<string> TranslatedResxes { get; private set; }
+        internal ResourceType ResourceFileType { get; private set; }
+
+        internal IEnumerable<string> TranslatedResourceFiles { get; private set; }
     }
 }

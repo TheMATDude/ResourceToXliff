@@ -7,8 +7,8 @@
     <ProjectGuid>{30DE69D3-2884-479B-A58A-76D980041CC2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ResxToXliff</RootNamespace>
-    <AssemblyName>ResxToXliff</AssemblyName>
+    <RootNamespace>ResourceToXliff</RootNamespace>
+    <AssemblyName>ResourceToXliff</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResxToXliff", "ResxToXliff\ResxToXliff.csproj", "{30DE69D3-2884-479B-A58A-76D980041CC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceToXliff", "ResourceToXliff\ResourceToXliff.csproj", "{30DE69D3-2884-479B-A58A-76D980041CC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
