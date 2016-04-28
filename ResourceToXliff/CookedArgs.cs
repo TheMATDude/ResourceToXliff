@@ -77,7 +77,7 @@ namespace ResourceToXliff
             Console.WriteLine("\tOutputFolder            = The folder to place the resulting XLF files");
             Console.WriteLine("\tDefaultLanguageCode     = Source language of the DefaultResourceFile.  (e.g.: 'en-US')");
             Console.WriteLine("\tDefaultResourceFile     = project's default resource file.  (e.g.: 'AppResources.resx')");
-            Console.WriteLine("\tTranslatedResourceFile1 = project's Translated RESX file.  (e.g.: 'AppResources.de-DE.resx'");
+            Console.WriteLine("\tTranslatedResourceFile1 = project's Translated resource file.  (e.g.: 'AppResources.de-DE.resx'");
             Console.WriteLine("\tTranslatedResourceFile2 = Ditto");
             Console.WriteLine("\nRESX usage example:");
             Console.WriteLine("\tResourceToXliff .\\ en-US AppResources.resx AppResources.de-DE.resx AppResources.fr-FR.resx");
