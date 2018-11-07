@@ -3,7 +3,7 @@
 Converts Resource files (RESX, RESW, RESJSON) to XLIFF 1.2 files that can be import (w/recycling) into a MAT enabled project, allowing for recovery of resources previously translated without MAT. 
 
 **Usage:**<br>
-ResourceToXliff OutputFolder DefaultLanguage DefaultResourceFile TranslatedResourceFile1 [TranslatedResourceFile2 ...]
+ResourceToXliff OutputFolder DefaultLanguageCode DefaultResourceFile TranslatedResourceFile1 [TranslatedResourceFile2 ...]
 
 **Where:**
 
